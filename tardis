@@ -1,0 +1,156 @@
+#!/usr/bin/env bash
+
+################################################################################
+# AUTOR: Victor Dias Marques                                                   #
+# CONTATO: victordmarx@pm.me                                                   #
+# DATA: 04/10/2025                                                             #
+# DESCRIÇÃO: script para facilitar acesso a outros scripts e automatizar       #
+################################################################################
+# VERSÃO: v1.0.0                                                               #
+# HISTÓRICO:                                                                   #
+#   1.0.0 - 04/10/2025 - Versão inicial                                        #
+################################################################################
+
+function menu (){
+    echo "+------------------------------------------------------------------------------------------+"
+    echo "|     T.A.R.D.I.S - Transformador Automático de Rotinas e Diversões Inúteis do Sistema     |"
+    echo "+------------------------------------------------------------------------------------------+"
+    echo "|v1.0.0                                                                                    |"
+    echo "|     1 - Backup: faz backup compactado e criptografado de alguns diretórios               |"
+    echo "|     2 - Criar script: cria um script com cabeçalho padronizado                           |"
+    echo "|     3 - Data imperial: exibe a data atual convertida para data imperial                  |"
+    echo "|     4 - Data estelar: exibe a data atual convertida para data estelar                    |"
+    echo "|     5 - Versionamento: exibe um manual de versionamento de scripts                       |"
+    echo "|     0 - Sair                                                                             |"
+    echo "|                                                                                          |"
+    echo "+------------------------------------------------------------------------------------------+"
+}
+
+function backup() {
+    while true; do
+	
+	echo "1 - Total"
+	echo "2 - Total separado"
+	echo "3 - Parcial"
+	echo "0 - Voltar"
+	
+	read -p "Escolha o tipo de backup: " bkp_option
+
+	case $bkp_option in
+	    1) command backup t ;;
+
+	    2) command backup ts ;;
+
+	    3) command backup p ;;
+
+	    0) break ;;
+
+	    *) echo "Opção inválida"
+	esac
+    done
+}    
+
+function criar_script() {
+    while true; do
+	read -p "Em qual diretório deseja criar o script? " dir
+	eval dir="$dir"
+	read -p "Qual deve ser o nome do script? " script_name
+
+	command cs "$dir" "$script_name"
+
+	echo "0 - Voltar"
+	echo "1 - Executar novamente"
+
+	read -p "" sub_menu_script
+
+	case $sub_menu_script in
+    	    0) break ;;
+	    1) continue ;;
+	    *) echo "Opção inválida" ;;
+	esac	
+    done
+}
+
+function imperial_date() {
+    while true; do
+	command imperial_date
+	echo "0 - Voltar"
+	echo "1 - Exectuar novamente"
+	read -p "" sub_menu_imperial_date
+
+	case $sub_menu_imperial_date in
+	    0) break ;;
+	    1) continue ;;
+	    *) echo "Opção inválida" ;;
+	esac
+    done
+}
+
+function stardate() {
+    while true; do
+	command stardate
+	echo "0 - Voltar"
+	echo "1 - Executar novamente"
+	read -p "" sub_menu_stardate
+
+	case $sub_menu_stardate in
+	    0) break ;;
+	    1) continue ;;
+	    *) echo "Opção inválida" ;;
+	esac
+    done
+}
+
+function versao() {
+    while true; do
+	command versao
+	echo "0 - Voltar"
+	echo "1 - Executar novamente"
+	read -p "" sub_menu_versao
+
+	case $sub_menu_versao in
+	    0) break ;;
+	    1) continue ;;
+	    *) echo "Opção inválida" ;;
+	esac
+    done
+}
+
+RESET='\033[0m'
+YELLOW='\033[1;33m'
+
+echo -e "${YELLOW}"
+
+echo " .--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--. "
+echo "/ .. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \ "
+echo "\ \/\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ \/ /"
+echo " \/ /'--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--'\/ / "
+echo " / /\                                                                                        / /\ "
+echo "/ /\ \ .___________.        ___         .______          _______      __          _______.  / /\ \ "
+echo "\ \/ / |           |       /   \        |   _  \        |       \    |  |        /       |  \ \/ /"
+echo " \/ /  '---|  |----'      /  ^  \       |  |_)  |       |  .--.  |   |  |       |   (----'   \/ / "
+echo " / /\      |  |          /  /_\  \      |      /        |  |  |  |   |  |        \   \       / /\ "
+echo "/ /\ \     |  |         /  _____  \     |  |\  \----.   |  '--'  |   |  |    .----)   |     / /\ \ "
+echo "\ \/ /     |__|        /__/     \__\    | _| '._____|   |_______/    |__|    |_______/      \ \/ /"
+echo " \/ /                                                                                        \/ / "
+echo " / /\.--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--./ /\ "
+echo "/ /\ \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \/\ \ "
+echo "\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ '' /"
+echo " '--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--' "
+#echo -e ${RESET}
+
+while true; do
+    menu
+
+    read -p "Escolha uma opção: " menu_option
+
+    case $menu_option in
+	1) backup ;;
+	2) criar_script ;;
+	3) imperial_date ;;
+	4) stardate ;;
+	5) versao ;;
+	0) break ;;
+    esac
+done
+
