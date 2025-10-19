@@ -6,21 +6,26 @@
 # DATA: 04/10/2025                                                             #
 # DESCRIÇÃO: script para facilitar acesso a outros scripts e automatizar       #
 ################################################################################
-# VERSÃO: v1.0.0                                                               #
+# VERSÃO: v1.1.0                                                               #
 # HISTÓRICO:                                                                   #
-#   1.0.0 - 04/10/2025 - Versão inicial                                        #
+#   1.1.0: 19/10/2025                                                          #
+#     MELHORIAS                                                                #
+#        - Adicionada opção para mostrar atalhos do Emacs                      #
+#        - Adicionada opção para backup de domingo                             #
+#   1.0.0: 04/10/2025 - Versão inicial                                         #
 ################################################################################
 
 function menu (){
     echo "+------------------------------------------------------------------------------------------+"
     echo "|     T.A.R.D.I.S - Transformador Automático de Rotinas e Diversões Inúteis do Sistema     |"
     echo "+------------------------------------------------------------------------------------------+"
-    echo "|v1.0.0                                                                                    |"
+    echo "|v1.1.0                                                                                    |"
     echo "|     1 - Backup: faz backup compactado e criptografado de alguns diretórios               |"
     echo "|     2 - Criar script: cria um script com cabeçalho padronizado                           |"
     echo "|     3 - Data imperial: exibe a data atual convertida para data imperial                  |"
     echo "|     4 - Data estelar: exibe a data atual convertida para data estelar                    |"
     echo "|     5 - Versionamento: exibe um manual de versionamento de scripts                       |"
+    echo "|     6 - Atalhos Emacs: exibe uma lista com diversos atalhos do Emacs                     |"
     echo "|     0 - Sair                                                                             |"
     echo "|                                                                                          |"
     echo "+------------------------------------------------------------------------------------------+"
@@ -32,6 +37,7 @@ function backup() {
 	echo "1 - Total"
 	echo "2 - Total separado"
 	echo "3 - Parcial"
+	echo "4 - Domingo"
 	echo "0 - Voltar"
 	
 	read -p "Escolha o tipo de backup: " bkp_option
@@ -42,6 +48,8 @@ function backup() {
 	    2) command backup ts ;;
 
 	    3) command backup p ;;
+
+	    4) command backup t ; command backup ts ;;
 
 	    0) break ;;
 
@@ -116,6 +124,10 @@ function versao() {
     done
 }
 
+function emacs() {
+    cat emacs_atalhos.txt
+}
+
 RESET='\033[0m'
 YELLOW='\033[1;33m'
 
@@ -150,6 +162,7 @@ while true; do
 	3) imperial_date ;;
 	4) stardate ;;
 	5) versao ;;
+	6) emacs ;;
 	0) break ;;
     esac
 done
