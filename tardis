@@ -6,14 +6,38 @@
 # DATA: 04/10/2025                                                             #
 # DESCRIÇÃO: script para facilitar acesso a outros scripts e automatizar       #
 ################################################################################
-# VERSÃO: v1.1.0                                                               #
+# VERSÃO: v1.2.0                                                               #
 # HISTÓRICO:                                                                   #
+#   1.2.0: 22/10/2025                                                          #
+#     MELHORIAS                                                                #
+#        - Agora a tela é limpa a cada função chamada, de forma que ela é      #
+#          atualizada, ao invés de ficar com texto rolando no terminal.        #
 #   1.1.0: 19/10/2025                                                          #
 #     MELHORIAS                                                                #
 #        - Adicionada opção para mostrar atalhos do Emacs                      #
 #        - Adicionada opção para backup de domingo                             #
 #   1.0.0: 04/10/2025 - Versão inicial                                         #
 ################################################################################
+
+function cabecalho_tardis(){
+    echo " .--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--. "
+    echo "/ .. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \ "
+    echo "\ \/\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ \/ /"
+    echo " \/ /'--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--'\/ / "
+    echo " / /\                                                                                        / /\ "
+    echo "/ /\ \ .___________.        ___         .______          _______      __          _______.  / /\ \ "
+    echo "\ \/ / |           |       /   \        |   _  \        |       \    |  |        /       |  \ \/ /"
+    echo " \/ /  '---|  |----'      /  ^  \       |  |_)  |       |  .--.  |   |  |       |   (----'   \/ / "
+    echo " / /\      |  |          /  /_\  \      |      /        |  |  |  |   |  |        \   \       / /\ "
+    echo "/ /\ \     |  |         /  _____  \     |  |\  \----.   |  '--'  |   |  |    .----)   |     / /\ \ "
+    echo "\ \/ /     |__|        /__/     \__\    | _| '._____|   |_______/    |__|    |_______/      \ \/ /"
+    echo " \/ /                                                                                        \/ / "
+    echo " / /\.--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--./ /\ "
+    echo "/ /\ \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \/\ \ "
+    echo "\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ '' /"
+    echo " '--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--' "
+
+}
 
 function menu (){
     echo "+------------------------------------------------------------------------------------------+"
@@ -33,7 +57,9 @@ function menu (){
 
 function backup() {
     while true; do
-	
+	clear
+        cabecalho_tardis
+	echo "Backup"
 	echo "1 - Total"
 	echo "2 - Total separado"
 	echo "3 - Parcial"
@@ -44,13 +70,9 @@ function backup() {
 
 	case $bkp_option in
 	    1) command backup t ;;
-
 	    2) command backup ts ;;
-
 	    3) command backup p ;;
-
 	    4) command backup t ; command backup ts ;;
-
 	    0) break ;;
 
 	    *) echo "Opção inválida"
@@ -60,27 +82,48 @@ function backup() {
 
 function criar_script() {
     while true; do
+	clear
+	cabecalho_tardis
+	echo "Criar script"
+	echo "0 - Voltar"
 	read -p "Em qual diretório deseja criar o script? " dir
-	eval dir="$dir"
-	read -p "Qual deve ser o nome do script? " script_name
 
-	command cs "$dir" "$script_name"
+	if [ $dir = '0' ]; then
+	    break
+	else
+	    eval dir="$dir"
+	fi
 
 	echo "0 - Voltar"
-	echo "1 - Executar novamente"
+	read -p "Qual deve ser o nome do script? " script_name
 
-	read -p "" sub_menu_script
+	if [ $script_name = '0' ]; then
+	    break
+	else
+	    command cs "$dir" "$script_name"
+	  
+	    echo "0 - Voltar"
+	    echo "1 - Executar novamente"
 
-	case $sub_menu_script in
-    	    0) break ;;
-	    1) continue ;;
-	    *) echo "Opção inválida" ;;
-	esac	
+	    read -p "" sub_menu_script
+
+	    case $sub_menu_script in
+    		0) break ;;
+		1) continue ;;
+		*) echo "Opção inválida" ;;
+	    esac		    
+	fi
+	
+
+
     done
 }
 
 function imperial_date() {
     while true; do
+	clear
+	cabecalho_tardis
+	echo "Data imperial"
 	command imperial_date
 	echo "0 - Voltar"
 	echo "1 - Exectuar novamente"
@@ -96,6 +139,8 @@ function imperial_date() {
 
 function stardate() {
     while true; do
+	clear
+	cabecalho_tardis
 	command stardate
 	echo "0 - Voltar"
 	echo "1 - Executar novamente"
@@ -111,6 +156,7 @@ function stardate() {
 
 function versao() {
     while true; do
+	clear
 	command versao
 	echo "0 - Voltar"
 	echo "1 - Executar novamente"
@@ -126,6 +172,14 @@ function versao() {
 
 function emacs() {
     cat emacs_atalhos.txt
+
+    echo "0 - Voltar"
+    read -p "" sub_menu_emacs
+    case $sub_menu_emacs in
+	0) break;;
+	*) echo "Opção inválida" ;;
+    esac
+    
 }
 
 RESET='\033[0m'
@@ -133,25 +187,11 @@ YELLOW='\033[1;33m'
 
 echo -e "${YELLOW}"
 
-echo " .--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--. "
-echo "/ .. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \ "
-echo "\ \/\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ \/ /"
-echo " \/ /'--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--'\/ / "
-echo " / /\                                                                                        / /\ "
-echo "/ /\ \ .___________.        ___         .______          _______      __          _______.  / /\ \ "
-echo "\ \/ / |           |       /   \        |   _  \        |       \    |  |        /       |  \ \/ /"
-echo " \/ /  '---|  |----'      /  ^  \       |  |_)  |       |  .--.  |   |  |       |   (----'   \/ / "
-echo " / /\      |  |          /  /_\  \      |      /        |  |  |  |   |  |        \   \       / /\ "
-echo "/ /\ \     |  |         /  _____  \     |  |\  \----.   |  '--'  |   |  |    .----)   |     / /\ \ "
-echo "\ \/ /     |__|        /__/     \__\    | _| '._____|   |_______/    |__|    |_______/      \ \/ /"
-echo " \/ /                                                                                        \/ / "
-echo " / /\.--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--./ /\ "
-echo "/ /\ \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \/\ \ "
-echo "\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ ''\ '' /"
-echo " '--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--''--' "
-#echo -e ${RESET}
+
 
 while true; do
+    clear
+    cabecalho_tardis
     menu
 
     read -p "Escolha uma opção: " menu_option
