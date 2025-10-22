@@ -43,7 +43,7 @@ function menu (){
     echo "+------------------------------------------------------------------------------------------+"
     echo "|     T.A.R.D.I.S - Transformador Automático de Rotinas e Diversões Inúteis do Sistema     |"
     echo "+------------------------------------------------------------------------------------------+"
-    echo "|v1.1.0                                                                                    |"
+    echo "|v1.2.0                                                                                    |"
     echo "|     1 - Backup: faz backup compactado e criptografado de alguns diretórios               |"
     echo "|     2 - Criar script: cria um script com cabeçalho padronizado                           |"
     echo "|     3 - Data imperial: exibe a data atual convertida para data imperial                  |"
