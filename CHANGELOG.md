@@ -5,6 +5,7 @@
     - Interface gum implementada
     ### Removed
     - Removida opção de atalhos do emacs
+    - Removida a função backup. Agora a opção backup do menu chama direto o script backup.
     
     ## [1.2.1] - 25/10/2025
     ### Fixed

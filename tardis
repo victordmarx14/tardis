@@ -18,28 +18,6 @@ function cabecalho_tardis(){
     "$TARDIS" "" "Transformador Automático de Rotinas e" "Diversões Inúteis do Sistema" "" "$VERSION"
 }
 
-function backup() {
-    while true; do
-	clear
-        cabecalho_tardis
-
-	menu_backup=$(gum choose --cursor.foreground 39 --selected.foreground 39 \
-			   "📦 Total" \
-			   "📂 Total separado" \
-			   "⚡ Parcial" \
-			   "☀️  Domingo" \
-			   "↩️  Voltar")
-	
-	case $menu_backup in
-	    *"Total"*) command backup -t ;;
-	    *"Total separada"*) command backup -ts ;;
-	    *"Parcial"*) command backup -p ;;
-	    *"Domingo"*) command backup -d ;;
-	    *"Voltar"*) return 0 ;;
-	esac
-    done
-}    
-
 function criar_script() {
     while true; do
 	clear
@@ -128,7 +106,7 @@ while true; do
     "🏷️  Versionamento" "🚪 Sair")
     
     case "$menu_principal" in
-	*"Backup"*) backup ;;
+	*"Backup"*) command backup ;;
 	*"Criar script"*) criar_script ;;
 	*"Data Imperial"*) imperial_date ;;
 	*"Data Estelar"*) stardate ;;
