@@ -1,6 +1,6 @@
     # Changelog - Tardis script
     
-    ## [1.3.0] - 17/02/2026
+    ## [2.0.0] - 17/02/2026
     ### Added
     - Interface gum implementada
     ### Removed
